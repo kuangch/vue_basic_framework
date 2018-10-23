@@ -30,6 +30,14 @@ export default {
      }
   }
 }
+
+if(true){
+    console.log('kuangch')
+}else {
+    var x = 'kuangch-unreachable'
+}
+
+
 </script>
 
 <style>

@@ -1,3 +1,5 @@
+const  CompressionPlugin = require('compression-webpack-plugin')
+const  UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 let config = {
 
     // 链式配置
@@ -19,19 +21,29 @@ let config = {
 
 
         // 代码分割
+        const commonOptions = {
+            chunks: 'all',
+            reuseExistingChunk: true
+        }
         // config.entry('vue').add('vue').end()
-        // config.entry('jquery').add('jquery').end()
+        // config.entry('dll').add('jquery').add('vue').end()
         // config.entry('dilu_common').add('convenience-image').end()
+        // config.output.chunkFilename('js/[name].chunk.[contentHash:8].js')
+        // config.optimization.namedChunks = true
+        // config.optimization.moduleIds = 'hashed'
+        // config.optimization.runtimeChunk({
+        //     name: 'manifest'
+        // })
         config.optimization.splitChunks({
-            // chunks: "all",
+            // chunks: 'initial',
             // automaticNameDelimiter: '-',
             // name: true,
             cacheGroups: {
-                vue: {
-                    test: /[\\/]node_modules[\\/]vue[\\/]/,
-                    chunks: 'initial',
-                    name: "vue",
+                dll: {
+                    test: /[\\/]node_modules[\\/](vue|jquery)[\\/]/,
+                    name: "chunk-vendors",
                     priority: 10,
+                    ...commonOptions
                 },
 
                 // jquery: {
@@ -54,13 +66,32 @@ let config = {
     },
 
     // 普通配置
-    // configureWebpack: config => {
-    //     // if (process.env.NODE_ENV === 'production') {
-    //     //     // 为生产环境修改配置...
-    //     // } else {
-    //     //     // 为开发环境修改配置...
-    //     // }
-    // },
+    configureWebpack: config => {
+        if (process.env.NODE_ENV === 'production') {
+            // 为生产环境修改配置...
+            return {
+                plugins:[
+                    new UglifyJSPlugin({
+                        uglifyOptions: {
+                            compress: {
+                                warnings: false,
+                                drop_debugger: true,
+                                drop_console: true
+                            }
+                        }
+                    }),
+                    new CompressionPlugin({
+                        test: /\.js$|\.html$|\.css/,
+                        threshold:10240,
+                        deleteOriginalAssets:false
+                    })
+                ]
+            }
+
+        } else {
+            // 为开发环境修改配置...
+        }
+    },
 }
 
 
@@ -78,7 +109,7 @@ glob.sync(PAGES_PATH + '/*/index.js').forEach(filepath => {
         entry:filepath,
         title: pageName === 'app' ? projectName : pageName,
         filename: pageName === 'app' ? 'index.html' : `${pageName}.html`,
-        chunks:['vue',pageName]
+        // chunks:['vue_jquery',pageName]
     }
 })
 
