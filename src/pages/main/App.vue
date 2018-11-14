@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <!--<img alt="Vue logo" src="./assets/logo.png">-->
-    <img alt="Vue logo" src="../../assets/dollar.png">
+    <div class="container">
+    <convenience-image :src-nor="require('../../assets/dollar.png')"/>
+    </div>
     <br/>
-    <img alt="Vue logo" src="../../assets/plus-circle.png">
-
+    <img src="../../assets/plus-circle.png">
     <HelloWorld msg="Welcome"/>
     <button @click="goHome">home</button>
     <button @click="goAbout">about</button>
@@ -13,13 +13,19 @@
 
 <script>
 import HelloWorld from '../../components/HelloWorld.vue'
-import jquery from 'jquery'
-import CI from 'convenience-image'
+import ConvenienceImage from 'convenience-image'
 
 export default {
   name: 'app',
+  mounted: function(){
+      this.$http.get('/data/get_latest_person_pass_info/0/10/').then((responseData) => {
+          console.log(responseData)
+      }).catch((reason => {
+          console.error(reason)
+      }))
+  } ,
   components: {
-    HelloWorld
+    HelloWorld, ConvenienceImage
   },
   methods: {
      goHome: function () {
@@ -31,13 +37,6 @@ export default {
   }
 }
 
-if(true){
-    console.log('kuangch')
-}else {
-    var x = 'kuangch-unreachable'
-}
-
-
 </script>
 
 <style>
@@ -46,7 +45,13 @@ if(true){
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+
   color: #2c3e50;
   margin-top: 60px;
+}
+.container{
+  height: 100px;
+  width: 120px;
+  display: inline-block;
 }
 </style>

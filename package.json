@@ -9,9 +9,12 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "convenience-image": "^0.1.2",
-    "jquery": "^3.3.1",
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "vue-axios": "^2.1.4",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.5",

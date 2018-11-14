@@ -6,7 +6,6 @@
 
 <script>
 
-    import CI from 'convenience-image'
     export default {
         name: "about"
     }

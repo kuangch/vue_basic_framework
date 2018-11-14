@@ -6,7 +6,6 @@
 
 <script>
 
-    import jquery from 'jquery'
     export default {
         name: "home"
     }

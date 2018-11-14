@@ -1,6 +1,11 @@
 const  CompressionPlugin = require('compression-webpack-plugin')
 const  UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+
+const devServer = require('./build/dev-server')
+
 let config = {
+
+    devServer,
 
     // 链式配置
     chainWebpack:(config) =>{
@@ -25,15 +30,6 @@ let config = {
             chunks: 'all',
             reuseExistingChunk: true
         }
-        // config.entry('vue').add('vue').end()
-        // config.entry('dll').add('jquery').add('vue').end()
-        // config.entry('dilu_common').add('convenience-image').end()
-        // config.output.chunkFilename('js/[name].chunk.[contentHash:8].js')
-        // config.optimization.namedChunks = true
-        // config.optimization.moduleIds = 'hashed'
-        // config.optimization.runtimeChunk({
-        //     name: 'manifest'
-        // })
         config.optimization.splitChunks({
             // chunks: 'initial',
             // automaticNameDelimiter: '-',
@@ -45,13 +41,6 @@ let config = {
                     priority: 10,
                     ...commonOptions
                 },
-
-                // jquery: {
-                //     chunks: 'initial',
-                //     test: /[\\/]node_modules[\\/]jquery[\\/]/,
-                //     name: "jquery",
-                //     priority: 10,
-                // },
 
                 // 这里定义的是在分离前被引用过2次以上的文件，将其一同打包到common.js中
                 // common:{
