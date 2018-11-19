@@ -10,6 +10,9 @@ let config = {
     // 链式配置
     chainWebpack:(config) =>{
 
+        // config.resolve.alias
+        //     .set('vue$', 'vue/dist/vue.js')
+
         config.devtool("source-map")
 
         // 小于1k的图片转成base64

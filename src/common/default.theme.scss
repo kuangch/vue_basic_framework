@@ -1,0 +1,28 @@
+// 主题文件
+$color_main: #0069D1;
+$color_main_txt: white;
+$color_main_second: #47B8FF;
+$color_content: #F4F4F4;
+$color_content_txt: #4A4A4A;
+$color_division_line: #D4D4D4;
+
+/* BUTTON*/
+.dilu-button {
+  color: $color_main_txt;
+}
+.dilu-button-main{
+  @extend .dilu-button;
+  background: $color_main_second;
+}
+.dilu-button-main:hover{
+  background: $color_main_second - rgb(20,20,20);
+}
+
+$color_dilu-button-warn: #EB981C;
+.dilu-button-warn{
+  @extend .dilu-button;
+  background: $color_dilu-button-warn;
+}
+.dilu-button-warn:hover{
+  background: $color_dilu-button-warn - rgb(20,20,20);
+}
