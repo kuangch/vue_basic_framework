@@ -13,43 +13,44 @@ import Per from './per'
 const packageJson = require('../../../../package')
 import ENV  from '../../../service/environment/env.config'
 
+const routerList = [{
+        path: `/${packageJson.name}/`,
+        name: 'home',
+        icon: 'el-icon-service',
+        component: Home,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: `/${packageJson.name}/about`,
+        name: 'about',
+        icon: 'el-icon-bell',
+        component: About,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: `/${packageJson.name}/per`,
+        name: 'per',
+        icon: 'el-icon-time',
+        component: Per,
+        meta: {
+            requiresAuth: true
+        }
+    }]
+
 Vue.use(VueRouter)
 const router = new VueRouter({
     mode: 'history',
     // base: `${ENV.routerBase}`,
     routes: [
         {
-            path: `/`,
-            name: 'login',
-            redirect: `/${packageJson.name}/`,
-            meta:{
-                requiresAuth: true
-            }
+          path: '/',
+          redirect: `/${packageJson.name}/`
         },
-        {
-            path: `/${packageJson.name}/`,
-            name: 'home',
-            component: Home,
-            meta:{
-                requiresAuth: true
-            }
-        },
-        {
-            path: `/${packageJson.name}/about`,
-            name: 'about',
-            component: About,
-            meta:{
-                requiresAuth: true
-            }
-        },
-        {
-            path: `/${packageJson.name}/per`,
-            name: 'per',
-            component: Per,
-            meta:{
-                requiresAuth: true
-            }
-        }
+        ...routerList
     ]
 })
 
@@ -69,4 +70,7 @@ router.beforeEach((to, from, next) => {
 })
 
 export default router
+export {
+    routerList
+}
 

@@ -15,9 +15,7 @@
     </header>
     <div class="main">
       <div class="nav">
-        <router-link class="ovfl-ellipsis" :to="{path: `/${packageJson.name}/`}"><i class="el-icon-service"></i><span>Home</span></router-link>
-        <router-link class="ovfl-ellipsis" :to="{path: `/${packageJson.name}/about`}"><i class="el-icon-star-off"></i><span>About</span></router-link>
-        <router-link class="ovfl-ellipsis" :to="{path: `/${packageJson.name}/per`}"><i class="el-icon-location-outline"></i><span>Per</span></router-link>
+        <router-link v-for="item in routerList" :key="item.name" class="ovfl-ellipsis" :to="{path: `${item.path}`}"><i :class="item.icon"></i><span>{{item.name}}</span></router-link>
       </div>
 
       <div class="content">
@@ -31,6 +29,8 @@
 <script>
 
 const packageJson = require('../../../package')
+import {routerList} from './router'
+
 export default {
   name: 'app',
   mounted: function(){
@@ -42,6 +42,7 @@ export default {
               privilege:'admin'
           },
           packageJson,
+          routerList
       }
   },
   methods: {
@@ -167,7 +168,7 @@ export default {
         background: white;
         height: $nav_item_height;
         line-height: $nav_item_height;
-        transition: font-size 500ms;
+        transition: font-size 300ms;
         font-size: 18px;
 
         i{

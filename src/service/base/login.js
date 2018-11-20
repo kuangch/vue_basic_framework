@@ -17,7 +17,7 @@ export default function (Vue) {
         let last = localStorage.getItem('time')
 
         if(last){
-            if(curr.getTime() - last < 1000* 10){
+            if(curr.getTime() - last < 1000* 100){
                 return true
             }
         }
