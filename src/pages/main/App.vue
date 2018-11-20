@@ -15,9 +15,9 @@
     </header>
     <div class="main">
       <div class="nav">
-        <router-link class="ovfl-ellipsis" to="/"><i class="el-icon-service"></i><span>Home</span></router-link>
-        <router-link class="ovfl-ellipsis" to="/about"><i class="el-icon-star-off"></i><span>About</span></router-link>
-        <router-link class="ovfl-ellipsis" to="/per"><i class="el-icon-location-outline"></i><span>Per</span></router-link>
+        <router-link class="ovfl-ellipsis" :to="{path: `/${packageJson.name}/`}"><i class="el-icon-service"></i><span>Home</span></router-link>
+        <router-link class="ovfl-ellipsis" :to="{path: `/${packageJson.name}/about`}"><i class="el-icon-star-off"></i><span>About</span></router-link>
+        <router-link class="ovfl-ellipsis" :to="{path: `/${packageJson.name}/per`}"><i class="el-icon-location-outline"></i><span>Per</span></router-link>
       </div>
 
       <div class="content">
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+
+const packageJson = require('../../../package')
 export default {
   name: 'app',
   mounted: function(){
@@ -38,7 +40,8 @@ export default {
           user_info:{
               name:'kuangch',
               privilege:'admin'
-          }
+          },
+          packageJson,
       }
   },
   methods: {

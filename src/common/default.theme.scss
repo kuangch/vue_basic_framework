@@ -12,17 +12,17 @@ $color_division_line: #D4D4D4;
 }
 .dilu-button-main{
   @extend .dilu-button;
-  background: $color_main_second;
+  background-color: $color_main_second;
 }
 .dilu-button-main:hover{
-  background: $color_main_second - rgb(20,20,20);
+  background-color: $color_main_second - rgb(20,20,20);
 }
 
 $color_dilu-button-warn: #EB981C;
 .dilu-button-warn{
   @extend .dilu-button;
-  background: $color_dilu-button-warn;
+  background-color: $color_dilu-button-warn;
 }
 .dilu-button-warn:hover{
-  background: $color_dilu-button-warn - rgb(20,20,20);
+  background-color: $color_dilu-button-warn - rgb(20,20,20);
 }

@@ -4,18 +4,20 @@
  *     date : 2018/7/20
  * ======================================== */
 
-let baseUrl = "";   //这里是一个默认的url，可以没有
 let urlPrefix = '/dev_test'
+
+let vars = {}
 switch (process.env.NODE_ENV) {
     case 'development':
-        baseUrl = urlPrefix  //这里是本地的请求url
+        vars.baseUrl = urlPrefix  //这里是本地的请求url
+        vars.routerBase = '/app/'
         break
     case 'production':
-        baseUrl = "/"   //生产环境url
+        vars.baseUrl = "/"   //生产环境url
+        vars.routerBase = "/"
         break
 }
 
-export {
-    baseUrl,
-    urlPrefix
+export default {
+    ...vars
 }

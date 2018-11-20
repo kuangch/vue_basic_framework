@@ -6,9 +6,9 @@
 
 import axios from 'axios'
 import vueAxios from 'vue-axios'
-import {baseUrl} from '../environment/env.config'
+import ENV from '../environment/env.config'
 
-axios.defaults.baseURL = baseUrl
+axios.defaults.baseURL = ENV.baseUrl
 axios.defaults.timeout = 1000 * 10
 
 export default function (Vue) {

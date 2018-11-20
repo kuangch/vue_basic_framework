@@ -10,24 +10,63 @@ import About from './about'
 import Home from './home'
 import Per from './per'
 
+const packageJson = require('../../../../package')
+import ENV  from '../../../service/environment/env.config'
+
 Vue.use(VueRouter)
-export default new VueRouter({
+const router = new VueRouter({
     mode: 'history',
+    // base: `${ENV.routerBase}`,
     routes: [
         {
-            path: '/',
+            path: `/`,
+            name: 'login',
+            redirect: `/${packageJson.name}/`,
+            meta:{
+                requiresAuth: true
+            }
+        },
+        {
+            path: `/${packageJson.name}/`,
             name: 'home',
-            component: Home
+            component: Home,
+            meta:{
+                requiresAuth: true
+            }
         },
         {
-            path: '/about',
+            path: `/${packageJson.name}/about`,
             name: 'about',
-            component: About
+            component: About,
+            meta:{
+                requiresAuth: true
+            }
         },
         {
-            path: '/per',
+            path: `/${packageJson.name}/per`,
             name: 'per',
-            component: Per
+            component: Per,
+            meta:{
+                requiresAuth: true
+            }
         }
     ]
 })
+
+/**
+ * 校验登录状态
+ */
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!Vue.$login()) {
+            window.location.href = '/'
+        } else {
+            next()
+        }
+    } else {
+        next() // 确保一定要调用 next()
+    }
+})
+
+export default router
+

@@ -15,14 +15,14 @@ let config = {
 
         config.devtool("source-map")
 
-        // 小于1k的图片转成base64
+        // 小于3k的图片转成base64
         const imageRule = config.module.rule('images')
         // imageRule.uses.clear()
         imageRule.test(/.(png|jpe?g|gif)(\?\.*)?$/)
             .use('url-loader')
             .loader('url-loader')
             .tap(options => Object.assign({},options, {
-                    limit: 1024,
+                    limit: 1024 * 3,
                     name: 'img/[name].[hash:8].[ext]'
                 })
             )
@@ -90,17 +90,31 @@ let config = {
 // 多页应用配置
 const glob = require('glob')
 const path = require('path')
+const packageJson = require('./package.json')
 const PAGES_PATH = path.resolve(__dirname, './src/pages')
 const pages = {}
+const projectName = packageJson.name
 
-const projectName = 'application'
+const getHtmlFile = function (pageName) {
+    let fileName = `${projectName}/${pageName}.html`
+    switch (pageName){
+        case 'main':
+            fileName = `${projectName}/index.html`
+            break
+        case 'login':
+            fileName = 'index.html'
+            break
+    }
+
+    return fileName
+}
+
 glob.sync(PAGES_PATH + '/*/index.js').forEach(filepath => {
     let pageName = path.basename(path.dirname(filepath))
-    pageName = pageName === 'main' ? 'app' : pageName
     pages[pageName] = {
         entry:filepath,
-        title: pageName === 'app' ? projectName : pageName,
-        filename: pageName === 'app' ? 'index.html' : `${pageName}.html`,
+        title: pageName === 'main' ? projectName : pageName,
+        filename: getHtmlFile(pageName),
         // chunks:['vue_jquery',pageName]
     }
 })
