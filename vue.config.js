@@ -2,10 +2,12 @@ const  CompressionPlugin = require('compression-webpack-plugin')
 const  UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 const devServer = require('./build/dev-server')
+const css = require('./build/css-loader')
 
 let config = {
 
     devServer,
+    css,
 
     // 链式配置
     chainWebpack:(config) =>{

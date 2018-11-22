@@ -20,7 +20,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-    @import "../../common/default.theme.scss";
     div{
         height: 100%;
         display: flex;
