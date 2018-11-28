@@ -3,11 +3,13 @@ const  UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 const devServer = require('./build/dev-server')
 const css = require('./build/css-loader')
+const settings = require('./config')
 
 let config = {
 
     devServer,
     css,
+    outputDir: settings.outputDir,
 
     // 链式配置
     chainWebpack:(config) =>{
