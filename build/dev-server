@@ -3,6 +3,8 @@
  *   author : Kuangch
  *     date : 2018/7/20
  * ======================================== */
+
+let packageJson = require('../package')
 let devServer = {
 
     //api代理，开发阶段使用（如用于调试的跨域访问接口）
@@ -14,7 +16,15 @@ let devServer = {
                 '^/dev_test': '',     // rewrite path
             },
         }
+    },
+
+    // 开发环境下的路由404处理（线上环境的nginx try_files配置）
+    historyApiFallback:{
+        rewrites:[
+            { from: RegExp(`^\/${packageJson.name}`), to: `/${packageJson.name}` }
+        ]
     }
+
 }
 
 module.exports = devServer
