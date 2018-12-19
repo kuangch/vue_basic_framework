@@ -4,11 +4,11 @@
       <img src="../../assets/logo.png"/>
       <span class="app-name">的卢深视</span>
       <div class="right">
-        <span><i class="el-icon-news"></i> {{user_info.privilege}}/{{user_info.name}}</span>
+        <span><i class="el-icon-date"></i> {{user_info.privilege}}/{{user_info.name}}</span>
        <nav class="nav">
         <ul>
-          <li @click="goHome"><a class="dilu-button-main btn-big" href="#">修改</a></li>
-          <li @click="goAbout"><a class="dilu-button-warn btn-big" href="#">退出</a></li>
+          <li @click="goHome"><a class="dilu-button-main btn-big" href="#">home</a></li>
+          <li @click="goAbout"><a class="dilu-button-warn btn-big" href="#">about</a></li>
         </ul>
        </nav>
       </div>
